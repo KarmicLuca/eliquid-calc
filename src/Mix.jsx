@@ -61,22 +61,13 @@ export default function MixCalculator() {
         let neededVGMl = (totalVolume * goalVG / 100.0) - (neededNicMl * 0.5) + (neededFlavorMl * goalVG / 100);
         let neededPGMl = (totalVolume - neededVGMl) - (neededNicMl * 0.5) - (neededFlavorMl * goalVG / 100);
 
-        console.log('Ingredients: ', {neededVGMl, neededPGMl, neededNicMl, neededFlavorMl})
-
         let resultVolumeMl = neededVGMl + neededPGMl;
         const resultRatio = (totalVolume - neededFlavorMl - neededNicMl) / resultVolumeMl;
-
-        console.log('Result volume before ', resultVolumeMl + neededNicMl + neededFlavorMl)
-
-        console.log('Adjust by: ', resultRatio);
 
         neededVGMl = neededVGMl * resultRatio;
         neededPGMl = neededPGMl * resultRatio;
 
         resultVolumeMl = parseFloat(neededVGMl + neededPGMl + neededNicMl + neededFlavorMl);
-
-        console.log('Ingredients after: ', {neededVGMl, neededPGMl, neededNicMl, neededFlavorMl})
-        console.log('Volume after', resultVolumeMl)
 
         const neededVGGrams = neededVGMl * 1.26;
         const neededPGGrams = neededPGMl * 1.038;
