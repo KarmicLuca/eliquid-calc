@@ -112,7 +112,7 @@ export default function MixCalculator() {
 
   return (
     <>
-      <h2>ELiquid Calculator</h2>
+      <h2>Ingredients Calculator</h2>
       <div className="base-nic">
         <table>
           <thead>
@@ -125,10 +125,10 @@ export default function MixCalculator() {
           </thead>
           <tbody>
             <tr>
-              <td><input id="totalVolume" type="number" onChange={(evt) => calculateMix(evt)} value={goalMixData.totalVolume}/></td>
-              <td><input id="goalVG" type="number" onChange={(evt) => calculateMix(evt)} value={goalMixData.goalVG}/></td>
-              <td><input id="goalNic" type="number" onChange={(evt) => calculateMix(evt)} value={goalMixData.goalNic}/></td>
-              <td><input id="goalFlavorPc" type="number" onChange={(evt) => calculateMix(evt)} value={goalMixData.goalFlavorPc}/></td>
+              <td><input id="totalVolume" type="number" step="1" onChange={(evt) => calculateMix(evt)} value={goalMixData.totalVolume}/></td>
+              <td><input id="goalVG" type="number" step="1" onChange={(evt) => calculateMix(evt)} value={goalMixData.goalVG}/></td>
+              <td><input id="goalNic" type="number" step="0.1" onChange={(evt) => calculateMix(evt)} value={goalMixData.goalNic}/></td>
+              <td><input id="goalFlavorPc" type="number" step="1" onChange={(evt) => calculateMix(evt)} value={goalMixData.goalFlavorPc}/></td>
             </tr>
             <tr>
               <td colSpan={3}><strong>Result:</strong></td>

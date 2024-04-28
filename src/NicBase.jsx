@@ -58,9 +58,9 @@ export default function NicBaseCalculator() {
               <td>Goal mg/ml</td>
             </tr>
             <tr>
-              <td><input id="totalVolume" type="number" onChange={(evt) => calculateNicBase(evt)} value={nicBaseData.totalVolume}/></td>
-              <td><input id="nicBaseConcentration" type="number" onChange={(evt) => calculateNicBase(evt)} value={nicBaseData.nicBaseConcentration}/></td>
-              <td><input id="concentrationGoal" type="number" onChange={(evt) => calculateNicBase(evt)} value={nicBaseData.concentrationGoal}/></td>
+              <td><input id="totalVolume" type="number" step="1" onChange={(evt) => calculateNicBase(evt)} value={nicBaseData.totalVolume}/></td>
+              <td><input id="nicBaseConcentration" type="number" step="1" onChange={(evt) => calculateNicBase(evt)} value={nicBaseData.nicBaseConcentration}/></td>
+              <td><input id="concentrationGoal" type="number" step="0.1" onChange={(evt) => calculateNicBase(evt)} value={nicBaseData.concentrationGoal}/></td>
             </tr>
             <tr>
               <td colSpan={3}>Result: you need <strong>{result}ml</strong> ({resultGrams}g) of {nicBaseConcentration}mg/ml nic base to reach <strong>{totalMl}ml</strong> of <strong>{concentrationGoal}mg/ml</strong> liquid.</td>
