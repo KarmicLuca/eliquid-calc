@@ -13,10 +13,12 @@ function App() {
   return (
     <>
       <div>
-        <h1>E-liquid Calculators</h1>
+        <h1 className='my-8'>E-liquid Calculators</h1>
       </div>
-      <NicBaseCalculator />
-      <MixCalculator />
+      <div className='flex flex-col gap-4'>
+        <NicBaseCalculator />
+        <MixCalculator />
+      </div>
     </>
   )
 }
