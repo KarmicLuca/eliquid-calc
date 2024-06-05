@@ -120,12 +120,12 @@ export default function MixCalculator() {
 
   return (
     <>
-      <section className="mix-calc p-6 pt-4 bg-stone-900 rounded-lg">
-        <h2 className="mb-4 text-xl font-semibold">Ingredients Calculator</h2>
+      <section className="mix-calc w-full p-6 pt-4 bg-stone-900 rounded-lg">
+        <h2 className="mb-4 p-2 text-xl font-semibold">Ingredients Calculator</h2>
         <div className="flex flex-col gap-2 ">
-          <div className="flex flex-row content-center justify-around gap-4 mb-4">
-            <div className="flex flex-col gap-2 w-1/2 p-3 mb-2 text-base font-semibold bg-stone-900 rounded-lg">
-              <h3 className="p-2 mb-3 text-sm font-semibold bg-stone-700 rounded-md">
+          <div className="flex flex-col lg:flex-row content-center justify-around lg:gap-4 mb-4">
+            <div className="flex flex-col gap-1 lg:gap-2 w-full lg:w-1/2 p-3 pb-1 lg:pb-3 lg:mb-2 text-base font-semibold bg-stone-900 rounded-lg">
+              <h3 className="p-2 mb-1 lg:mb-3 text-sm font-semibold bg-stone-700 rounded-md">
                 Goal ml
               </h3>
               <input
@@ -137,9 +137,9 @@ export default function MixCalculator() {
                 value={goalMixData.totalVolume}
               />
             </div>
-            <div className="flex flex-col gap-2 w-1/2 p-3 mb-2 text-base font-semibold bg-stone-900 rounded-lg">
-              <h3 className="p-2 mb-3 text-sm font-semibold bg-stone-700 rounded-md">
-                Goal VG
+            <div className="flex flex-col gap-1 lg:gap-2 w-full lg:w-1/2 p-3 pb-1 lg:pb-3 lg:mb-2 text-base font-semibold bg-stone-900 rounded-lg">
+              <h3 className="p-2 mb-1 lg:mb-3 text-sm font-semibold bg-stone-700 rounded-md">
+                Goal VG %
               </h3>
               <input
                 className="p-2 text-center rounded-md"
@@ -150,8 +150,8 @@ export default function MixCalculator() {
                 value={goalMixData.goalVG}
               />
             </div>
-            <div className="flex flex-col gap-2 w-1/2 p-3 mb-2 text-base font-semibold bg-stone-900 rounded-lg">
-              <h3 className="p-2 mb-3 text-sm font-semibold bg-stone-700 rounded-md">
+            <div className="flex flex-col gap-1 lg:gap-2 w-full lg:w-1/2 p-3 pb-1 lg:pb-3 lg:mb-2 text-base font-semibold bg-stone-900 rounded-lg">
+              <h3 className="p-2 mb-1 lg:mb-3 text-sm font-semibold bg-stone-700 rounded-md">
                 Goal Nic mg/ml
               </h3>
               <input
@@ -163,8 +163,8 @@ export default function MixCalculator() {
                 value={goalMixData.goalNic}
               />
             </div>
-            <div className="flex flex-col gap-2 w-1/2 p-3 mb-2 text-base font-semibold bg-stone-900 rounded-lg">
-              <h3 className="p-2 mb-3 text-sm font-semibold bg-stone-700 rounded-md">
+            <div className="flex flex-col gap-1 lg:gap-2 w-full lg:w-1/2 p-3 pb-1 lg:pb-3 lg:mb-2 text-base font-semibold bg-stone-900 rounded-lg">
+              <h3 className="p-2 mb-1 lg:mb-3 text-sm font-semibold bg-stone-700 rounded-md">
                 Goal Flavor %
               </h3>
               <input

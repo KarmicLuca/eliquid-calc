@@ -1,5 +1,6 @@
 import NicBaseCalculator from './NicBase'
 import MixCalculator from './Mix'
+import Gorilla from './Gorilla'
 import './App.css'
 
 
@@ -15,9 +16,14 @@ function App() {
       <div>
         <h1 className='my-8'>E-liquid Calculators</h1>
       </div>
-      <div className='flex flex-col gap-4'>
-        <NicBaseCalculator />
-        <MixCalculator />
+      <div className='flex flex-row gap-12'>
+        <div className='flex flex-col gap-4'>
+          <NicBaseCalculator />
+          <MixCalculator />
+        </div>
+        <div>
+          <Gorilla />
+        </div>
       </div>
     </>
   )

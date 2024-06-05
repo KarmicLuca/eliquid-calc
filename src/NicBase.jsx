@@ -43,12 +43,12 @@ export default function NicBaseCalculator() {
 
   return (
     <>
-      <section className="base-nic p-6 pt-4 my-2 bg-stone-900 rounded-lg">
+      <section className="base-nic w-full p-6 pt-4 my-2 bg-stone-900 rounded-lg">
         <h2 className="text-xl font-semibold mb-6">Base + Nic</h2>
         <div className="flex flex-col gap-4">
           <div>
-            <div className="flex flex-row content-center justify-center gap-8 mb-6 px-12">
-              <div className="flex flex-col w-1/3">
+            <div className="flex flex-col lg:flex-row content-center justify-center gap-8 mb-6 px-12 ">
+              <div className="flex flex-col w-full lg:w-1/3">
                 <label htmlFor="totalVolume">
                   <h3 className='p-2 mb-3 text-sm font-semibold bg-stone-700 rounded-md'>Base ml</h3>
                 </label>
@@ -61,7 +61,7 @@ export default function NicBaseCalculator() {
                   value={nicBaseData.totalVolume}
                 />
               </div>
-              <div className="flex flex-col w-1/3">
+              <div className="flex flex-col w-full lg:w-1/3">
                 <label htmlFor="totalVolume">
                   <h3 className='p-2 mb-3 text-sm font-semibold bg-stone-700 rounded-md'>Nic mg/ml</h3>
                 </label>
@@ -74,7 +74,7 @@ export default function NicBaseCalculator() {
                   value={nicBaseData.nicBaseConcentration}
                 />
               </div>
-              <div className="flex flex-col w-1/3">
+              <div className="flex flex-col w-full lg:w-1/3">
                 <label htmlFor="totalVolume">
                   <h3 className='p-2 mb-3 text-sm font-semibold bg-stone-700 rounded-md'>Goal mg/ml</h3>
                 </label>
@@ -90,10 +90,12 @@ export default function NicBaseCalculator() {
             </div>
             <div>
               <div className="mt-4 p-2 bg-stone-800 rounded-md">
-                Result: you need <strong>{result}ml</strong> ({resultGrams}g) of{" "}
-                {nicBaseConcentration}mg/ml nic base to reach{" "}
-                <strong>{totalMl}ml</strong> of{" "}
-                <strong>{concentrationGoal}mg/ml</strong> liquid.
+                <p>
+                  Result: you need <strong>{result}ml</strong> ({resultGrams}g) of{" "}
+                  {nicBaseConcentration}mg/ml nic base to reach{" "}
+                  <strong>{totalMl}ml</strong> of{" "}
+                  <strong>{concentrationGoal}mg/ml</strong> liquid.
+                </p>
               </div>
             </div>
           </div>
