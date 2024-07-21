@@ -25,6 +25,7 @@ function App() {
           <Gorilla />
         </div>
       </div>
+      <a href="https://ssd-tester.com/">Find the best SSD for you on ssd-tester.com</a>
     </>
   )
 }
