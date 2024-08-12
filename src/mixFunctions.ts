@@ -1,39 +1,29 @@
 import { MixGoals, MixIngredients } from "./types";
 import { VGDensity, PGDensity, nicDensity } from "./constants";
 
+// TODO: Currently fixing nic base at 20 mg/ml 50/50, implement inputs and variable for these
+
 const ingredientsMix = (newMixData: MixGoals): MixIngredients => {
   const { totalVolume, goalVG, goalNic, goalFlavorPc } = newMixData;
 
-  const neededFlavorMl = (totalVolume * goalFlavorPc) / 100;
-  const neededNicMl = (totalVolume * goalNic) / 20.0;
+  let neededVGMl = totalVolume * goalVG * 0.01;
+  let neededPGMl = totalVolume * (100 - goalVG) * 0.01;
 
-  let neededVGMl =
-    (totalVolume * goalVG) / 100.0 -
-    neededNicMl * 0.5 +
-    (neededFlavorMl * goalVG) / 100;
-  let neededPGMl =
-    totalVolume -
-    neededVGMl -
-    neededNicMl * 0.5 -
-    (neededFlavorMl * goalVG) / 100;
+  const neededFlavorMl = totalVolume * goalFlavorPc * 0.01;
+  const neededNicMl = totalVolume * goalNic / 20.0;
 
-  let resultVolumeMl: number = neededVGMl + neededPGMl;
-  const resultRatio =
-    (totalVolume - neededFlavorMl - neededNicMl) / resultVolumeMl;
+  neededVGMl -= neededNicMl * 0.5;
+  neededPGMl -= (neededNicMl * 0.5) + neededFlavorMl;
 
-  neededVGMl = neededVGMl * resultRatio;
-  neededPGMl = neededPGMl * resultRatio;
-
-  resultVolumeMl = neededVGMl + neededPGMl + neededNicMl + neededFlavorMl;
+  const resultVolumeMl =  neededVGMl + neededPGMl + neededFlavorMl + neededNicMl;
 
   const neededVGGrams = neededVGMl * VGDensity;
   const neededPGGrams = neededPGMl * PGDensity;
   const neededNicGrams = neededNicMl * nicDensity;
-  const neededFlavorGrams = neededFlavorMl;
+  const neededFlavorGrams = neededFlavorMl * 1;
 
   const baseGrams = neededVGGrams + neededPGGrams;
-  const resultGrams =
-    neededVGGrams + neededPGGrams + neededNicGrams + neededFlavorGrams;
+  const resultGrams = baseGrams + neededNicGrams + neededFlavorGrams;
 
   const resultMix = {
     needVG: {
