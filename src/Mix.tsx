@@ -1,47 +1,19 @@
-import { useState } from "react";
+import { useState, FC, ChangeEvent } from "react";
 import MixResults from "./MixResults";
+import { ingredientsMix } from "./mixFunctions";
+import { MixIngredients, MixGoals } from "./types";
+import { defaultMixGoals, defaultMixIngredients } from "./defaults";
 
-const defaultMixGoals = {
-  totalVolume: 60.0,
-  goalVG: 60.0,
-  goalNic: 1.2,
-  goalFlavorPc: 5.0,
-};
-const defaultMixIngredients = {
-  needVG: {
-    volume: 34.2,
-    grams: 43.13,
-  },
-  needPG: {
-    volume: 19.2,
-    grams: 19.9,
-  },
-  needNic: {
-    volume: 3.6,
-    grams: 4.13,
-  },
-  needFlavor: {
-    volume: 3.0,
-    grams: 3.0,
-  },
-  total: {
-    volume: 60,
-    grams: 70.16,
-    baseGrams: 69.16,
-  },
-};
+const MixCalculator: FC = () => {
+  const [goalMixData, setGoalMixData] = useState<MixGoals>(defaultMixGoals);
+  const [result, setResult] = useState<MixIngredients>(defaultMixIngredients);
 
-export default function MixCalculator() {
-  const [goalMixData, setGoalMixData] = useState(defaultMixGoals);
-  const [result, setResult] = useState(defaultMixIngredients);
-
-  function calculateMix(event) {
+  function calculateMix(event: ChangeEvent<HTMLInputElement>) {
     const emptyField = Object.values(goalMixData).some(
       (input) => input === null || input === undefined
     );
 
     if (emptyField) {
-      setResult("n/d");
       console.log("Empty field");
       return false;
     }
@@ -52,66 +24,9 @@ export default function MixCalculator() {
         [event.target.id]: parseFloat(event.target.value),
       };
 
-      const { totalVolume, goalVG, goalNic, goalFlavorPc } = newMixData;
-
       // console.log({ totalVolume, goalVG, goalNic, goalFlavorPc })
 
-      const neededFlavorMl = (totalVolume * goalFlavorPc) / 100;
-      const neededNicMl = (totalVolume * goalNic) / 20.0;
-
-      let neededVGMl =
-        (totalVolume * goalVG) / 100.0 -
-        neededNicMl * 0.5 +
-        (neededFlavorMl * goalVG) / 100;
-      let neededPGMl =
-        totalVolume -
-        neededVGMl -
-        neededNicMl * 0.5 -
-        (neededFlavorMl * goalVG) / 100;
-
-      let resultVolumeMl = neededVGMl + neededPGMl;
-      const resultRatio =
-        (totalVolume - neededFlavorMl - neededNicMl) / resultVolumeMl;
-
-      neededVGMl = neededVGMl * resultRatio;
-      neededPGMl = neededPGMl * resultRatio;
-
-      resultVolumeMl = parseFloat(
-        neededVGMl + neededPGMl + neededNicMl + neededFlavorMl
-      );
-
-      const neededVGGrams = neededVGMl * 1.26;
-      const neededPGGrams = neededPGMl * 1.038;
-      const neededNicGrams = neededNicMl * 1.15;
-      const neededFlavorGrams = neededFlavorMl;
-
-      const baseGrams = neededVGGrams + neededPGGrams;
-      const resultGrams =
-        neededVGGrams + neededPGGrams + neededNicGrams + neededFlavorGrams;
-
-      const resultMix = {
-        needVG: {
-          volume: neededVGMl,
-          grams: neededVGGrams,
-        },
-        needPG: {
-          volume: neededPGMl,
-          grams: neededPGGrams,
-        },
-        needNic: {
-          volume: neededNicMl,
-          grams: neededNicGrams,
-        },
-        needFlavor: {
-          volume: neededFlavorMl,
-          grams: neededFlavorGrams,
-        },
-        total: {
-          volume: resultVolumeMl,
-          grams: resultGrams,
-          baseGrams: baseGrams,
-        },
-      };
+      const resultMix = ingredientsMix(newMixData);
 
       setResult(resultMix);
       return newMixData;
@@ -183,3 +98,5 @@ export default function MixCalculator() {
     </>
   );
 }
+
+export default MixCalculator

@@ -1,45 +1,42 @@
-import { useState } from "react";
+import { useState, ChangeEvent, FC } from "react";
+import { NicBaseData } from "./types";
+import { defaultNicBaseData, defaultNicBaseResult } from "./defaults";
 
-export default function NicBaseCalculator() {
-  const [nicBaseData, setNicBaseData] = useState({
-    totalVolume: 50.0,
-    nicBaseConcentration: 20.0,
-    concentrationGoal: 1.2,
-  });
+const NicBaseCalculator: FC = () => {
+  const [nicBaseData, setNicBaseData] = useState(defaultNicBaseData);
 
-  const [result, setResult] = useState(3.19);
+  const [result, setResult] = useState(defaultNicBaseResult);
 
-  function calculateNicBase(event) {
+  function calculateNicBase(event: ChangeEvent<HTMLInputElement>) {
     const emptyField = Object.values(nicBaseData).some(
       (input) => input === null || input === undefined
     );
 
     if (emptyField) {
-      setResult("n/d");
+      setResult(0);
       return false;
     }
 
-    setNicBaseData((prevBaseData) => {
+    setNicBaseData((prevBaseData): NicBaseData=> {
       const newBaseData = {
         ...prevBaseData,
-        [event.target.id]: event.target.value,
+        [event.target.id]: parseFloat(event.target.value),
       };
 
-      const { totalVolume, nicBaseConcentration, concentrationGoal } =
-        newBaseData;
-      const resultMl = (
+      const { totalVolume, nicBaseConcentration, concentrationGoal }: NicBaseData = newBaseData;
+      const resultMl : number = (
         (totalVolume * concentrationGoal) /
         (nicBaseConcentration - concentrationGoal)
-      ).toFixed(2);
+      );
       setResult(resultMl);
 
       return newBaseData;
     });
   }
 
-  const { totalVolume, nicBaseConcentration, concentrationGoal } = nicBaseData;
-  const totalMl = (parseFloat(totalVolume) + parseFloat(result)).toFixed(1);
-  const resultGrams = (result * 1.15).toFixed(2);
+  const { totalVolume, nicBaseConcentration, concentrationGoal }: NicBaseData = nicBaseData;
+  const totalMl : number = (totalVolume + result);
+  const resultGrams : number = (result * 1.15);
 
   return (
     <>
@@ -91,9 +88,9 @@ export default function NicBaseCalculator() {
             <div>
               <div className="mt-4 p-2 bg-stone-800 rounded-md">
                 <p>
-                  Result: you need <strong>{result}ml</strong> ({resultGrams}g) of{" "}
+                  Result: you need <strong>{result.toFixed(2)}ml</strong> ({resultGrams.toFixed(2)}g) of{" "}
                   {nicBaseConcentration}mg/ml nic base to reach{" "}
-                  <strong>{totalMl}ml</strong> of{" "}
+                  <strong>{totalMl.toFixed(2)}ml</strong> of{" "}
                   <strong>{concentrationGoal}mg/ml</strong> liquid.
                 </p>
               </div>
@@ -104,3 +101,5 @@ export default function NicBaseCalculator() {
     </>
   );
 }
+
+export default NicBaseCalculator;
