@@ -1,6 +1,6 @@
 import { FC } from "react";
 import ResultBox from "./ResultBox";
-import { MixResultsProps } from "./types";
+import { MixResultsProps } from "../types";
 
 const MixResults: FC<MixResultsProps> = ({ result, ...props }) => {
 

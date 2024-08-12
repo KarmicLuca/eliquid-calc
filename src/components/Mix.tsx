@@ -1,8 +1,8 @@
 import { useState, FC, ChangeEvent } from "react";
 import MixResults from "./MixResults";
-import { ingredientsMix } from "./mixFunctions";
-import { MixIngredients, MixGoals } from "./types";
-import { defaultMixGoals, defaultMixIngredients } from "./defaults";
+import { ingredientsMix } from "../mixFunctions";
+import { MixIngredients, MixGoals } from "../types";
+import { defaultMixGoals, defaultMixIngredients } from "../defaults";
 
 const MixCalculator: FC = () => {
   const [goalMixData, setGoalMixData] = useState<MixGoals>(defaultMixGoals);

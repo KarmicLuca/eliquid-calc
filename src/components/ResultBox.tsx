@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { ResultProperty } from "./types";
+import { ResultProperty } from "../types";
 
 const ResultBox: FC<ResultProperty> = ({ name, property, ...props }) => {
   let propertyTitle = '';
@@ -27,7 +27,7 @@ const ResultBox: FC<ResultProperty> = ({ name, property, ...props }) => {
         {propertyTitle}
       </h3>
       {property.volume && <p>{property.volume.toFixed(2)} ml</p>}
-      <p>{property.baseGrams ? property.baseGrams.toFixed(2) : property.grams.toFixed(2)} g</p>
+      <p>{property.grams.toFixed(2)} g</p>
     </div>
   </>
 }

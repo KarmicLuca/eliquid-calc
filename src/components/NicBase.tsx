@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, FC } from "react";
-import { NicBaseData } from "./types";
-import { defaultNicBaseData, defaultNicBaseResult } from "./defaults";
+import { NicBaseData } from "../types";
+import { defaultNicBaseData, defaultNicBaseResult } from "../defaults";
 
 const NicBaseCalculator: FC = () => {
   const [nicBaseData, setNicBaseData] = useState(defaultNicBaseData);

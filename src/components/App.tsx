@@ -1,7 +1,7 @@
 import NicBaseCalculator from './NicBase'
 import MixCalculator from './Mix'
 import Gorilla from './Gorilla'
-import './App.css'
+import '../assets/App.css'
 
 
 // Eliquid calculator tables where you input initial data and compute quantities of ingredients
