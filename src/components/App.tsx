@@ -1,31 +1,33 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import Home from './Home';
 import NicBaseCalculator from './NicBase'
 import MixCalculator from './Mix'
 import Gorilla from './Gorilla'
 import '../assets/App.css'
 
-
-// Eliquid calculator tables where you input initial data and compute quantities of ingredients
-// eg you have a certain amount of vg+pg and you want to add nic base to reach a concentration
-// or you have a certain flavor and want to make 60/40 at 5% fla 1.2 nic
-
+const router = createBrowserRouter([
+  {
+    path: '/eliquid-calc/',
+    element: <Home></Home>,
+    children: [
+      {
+        path: 'nicbase',
+        element: <NicBaseCalculator></NicBaseCalculator>
+      },
+      {
+        path: 'mixcalculator',
+        element: <MixCalculator></MixCalculator>
+      }
+    ]
+  },
+])
 
 function App() {
 
   return (
     <>
-      <div>
-        <h1 className='my-8'>E-liquid Calculators</h1>
-      </div>
-      <div className='flex flex-row gap-12'>
-        <div className='flex flex-col gap-4'>
-          <NicBaseCalculator />
-          <MixCalculator />
-        </div>
-        <div>
-          <Gorilla />
-        </div>
-      </div>
-      <a href="https://ssd-tester.com/">Find the best SSD for you on ssd-tester.com</a>
+      <RouterProvider router={router}></RouterProvider>
     </>
   )
 }

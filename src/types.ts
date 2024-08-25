@@ -1,3 +1,12 @@
+export interface Page {
+  handle: string,
+  title: string
+}
+
+export interface Pages {
+  pages: Page[]
+}
+
 export interface MixComponent {
   volume: number,
   grams: number

@@ -36,7 +36,7 @@ const MixCalculator: FC = () => {
   return (
     <>
       <section className="mix-calc w-full p-6 pt-4 bg-stone-900 rounded-lg">
-        <h2 className="mb-4 p-2 text-xl font-semibold">Ingredients Calculator</h2>
+        <h2 className="mb-4 p-2 text-xl font-semibold">Full Mix Calculator</h2>
         <div className="flex flex-col gap-2 ">
           <div className="flex flex-col lg:flex-row content-center justify-around lg:gap-4 mb-4">
             <div className="flex flex-col gap-1 lg:gap-2 w-full lg:w-1/2 p-3 pb-1 lg:pb-3 lg:mb-2 text-base font-semibold bg-stone-900 rounded-lg">
