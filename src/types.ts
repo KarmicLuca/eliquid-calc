@@ -1,3 +1,12 @@
+export interface Page {
+  handle: string,
+  title: string
+}
+
+export interface Pages {
+  pages: Page[]
+}
+
 export interface MixComponent {
   volume: number,
   grams: number
@@ -41,5 +50,15 @@ export interface ResultProperty {
     baseGrams?: number
   },
   name: string
+}
+
+export interface MixPreset {
+  name: string,
+  ingredients: MixGoals
+}
+
+export interface MixContextType {
+  goals: MixGoals;
+  setGoals: React.Dispatch<React.SetStateAction<MixGoals>>;
 }
 

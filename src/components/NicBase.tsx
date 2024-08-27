@@ -41,7 +41,7 @@ const NicBaseCalculator: FC = () => {
   return (
     <>
       <section className="base-nic w-full p-6 pt-4 my-2 bg-stone-900 rounded-lg">
-        <h2 className="text-xl font-semibold mb-6">Base + Nic</h2>
+        <h2 className="text-xl font-semibold mb-6">Nic + Base Calculator</h2>
         <div className="flex flex-col gap-4">
           <div>
             <div className="flex flex-col lg:flex-row content-center justify-center gap-8 mb-6 px-12 ">
