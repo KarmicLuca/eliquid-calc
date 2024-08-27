@@ -52,3 +52,13 @@ export interface ResultProperty {
   name: string
 }
 
+export interface MixPreset {
+  name: string,
+  ingredients: MixGoals
+}
+
+export interface MixContextType {
+  goals: MixGoals;
+  setGoals: React.Dispatch<React.SetStateAction<MixGoals>>;
+}
+
