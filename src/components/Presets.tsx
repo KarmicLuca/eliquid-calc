@@ -2,10 +2,26 @@ import { FC, useContext, useEffect, useState } from "react";
 import PresetButton from "./PresetButton";
 import mixPresets from "../presets";
 import { MixPreset } from "../types";
+import { MixContext } from "./Mix";
 
 const Presets: FC = () => {
 
   const [presets, setPresets] = useState <MixPreset[]> ([]);
+
+  const mixContext = useContext(MixContext);
+
+  const handleAddPresets = () => {
+    const newPresets: MixPreset[] = [
+      ...presets,
+      {
+        name: 'New Preset',
+        ingredients: mixContext.goals
+      }
+    ];
+
+    setPresets(newPresets);
+    localStorage.setItem('mix_presets', JSON.stringify(newPresets));
+  }
 
   useEffect(() => {
     const storedPresets = localStorage.getItem('mix_presets');
@@ -28,6 +44,7 @@ const Presets: FC = () => {
             return <PresetButton key={preset.name} preset={preset}/>
           })
         }
+        <button onClick={handleAddPresets} className="px-4 py-2 rounded-md border-2 border-slate-500">+</button>
       </div>
     </div>
   </>
