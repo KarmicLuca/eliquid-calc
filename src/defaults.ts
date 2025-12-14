@@ -3,7 +3,7 @@ import { MixGoals, MixIngredients, NicBaseData } from "./types";
 const defaultNicBaseData: NicBaseData = {
   totalVolume: 50.0,
   nicBaseConcentration: 20.0,
-  concentrationGoal: 1.2,
+  concentrationGoal: 1.5,
 }
 
 const defaultNicBaseResult: number = 3.19

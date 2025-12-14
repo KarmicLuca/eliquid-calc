@@ -1,30 +1,51 @@
-import { useState, ChangeEvent, FC } from "react";
+import { useState, FC } from "react";
 import { NicBaseData } from "../types";
 import { defaultNicBaseData, defaultNicBaseResult } from "../defaults";
+import { NumericInputConfig, NumericInputGroup } from "./NumericInputs";
+
+type NicBaseInputKey = keyof NicBaseData;
+
+const nicBaseInputConfigs: NumericInputConfig<NicBaseInputKey>[] = [
+  {
+    id: "totalVolume",
+    label: "Base ml",
+    step: "1",
+  },
+  {
+    id: "nicBaseConcentration",
+    label: "Nic mg/ml",
+    step: "1",
+  },
+  {
+    id: "concentrationGoal",
+    label: "Goal mg/ml",
+    step: "0.1",
+  },
+];
 
 const NicBaseCalculator: FC = () => {
   const [nicBaseData, setNicBaseData] = useState(defaultNicBaseData);
-
   const [result, setResult] = useState(defaultNicBaseResult);
 
-  function calculateNicBase(event: ChangeEvent<HTMLInputElement>) {
-    const emptyField = Object.values(nicBaseData).some(
-      (input) => input === null || input === undefined
-    );
-
-    if (emptyField) {
-      setResult(0);
-      return false;
-    }
-
-    setNicBaseData((prevBaseData): NicBaseData=> {
-      const newBaseData = {
+  const handleInputChange = (id: NicBaseInputKey, value: string) => {
+    setNicBaseData((prevBaseData): NicBaseData => {
+      const newBaseData: NicBaseData = {
         ...prevBaseData,
-        [event.target.id]: parseFloat(event.target.value),
+        [id]: parseFloat(value),
       };
 
+      const emptyField = Object.values(newBaseData).some(
+        (input) =>
+          input === null || input === undefined || Number.isNaN(input)
+      );
+
+      if (emptyField) {
+        setResult(0);
+        return newBaseData;
+      }
+
       const { totalVolume, nicBaseConcentration, concentrationGoal }: NicBaseData = newBaseData;
-      const resultMl : number = (
+      const resultMl: number = (
         (totalVolume * concentrationGoal) /
         (nicBaseConcentration - concentrationGoal)
       );
@@ -32,7 +53,7 @@ const NicBaseCalculator: FC = () => {
 
       return newBaseData;
     });
-  }
+  };
 
   const { totalVolume, nicBaseConcentration, concentrationGoal }: NicBaseData = nicBaseData;
   const totalMl : number = (totalVolume + result);
@@ -44,47 +65,15 @@ const NicBaseCalculator: FC = () => {
         <h2 className="text-xl font-semibold mb-6">Nic + Base Calculator</h2>
         <div className="flex flex-col gap-4">
           <div>
-            <div className="flex flex-col lg:flex-row content-center justify-center gap-8 mb-6 px-12 ">
-              <div className="flex flex-col w-full lg:w-1/3">
-                <label htmlFor="totalVolume">
-                  <h3 className='p-2 mb-3 text-sm font-semibold bg-stone-700 rounded-md'>Base ml</h3>
-                </label>
-                <input
-                  className="p-2 text-center rounded-md"
-                  id="totalVolume"
-                  type="number"
-                  step="1"
-                  onChange={(evt) => calculateNicBase(evt)}
-                  value={nicBaseData.totalVolume}
-                />
-              </div>
-              <div className="flex flex-col w-full lg:w-1/3">
-                <label htmlFor="totalVolume">
-                  <h3 className='p-2 mb-3 text-sm font-semibold bg-stone-700 rounded-md'>Nic mg/ml</h3>
-                </label>
-                <input
-                  className="p-2 text-center rounded-md"
-                  id="nicBaseConcentration"
-                  type="number"
-                  step="1"
-                  onChange={(evt) => calculateNicBase(evt)}
-                  value={nicBaseData.nicBaseConcentration}
-                />
-              </div>
-              <div className="flex flex-col w-full lg:w-1/3">
-                <label htmlFor="totalVolume">
-                  <h3 className='p-2 mb-3 text-sm font-semibold bg-stone-700 rounded-md'>Goal mg/ml</h3>
-                </label>
-                <input
-                  className="p-2 text-center rounded-md"
-                  id="concentrationGoal"
-                  type="number"
-                  step="0.1"
-                  onChange={(evt) => calculateNicBase(evt)}
-                  value={nicBaseData.concentrationGoal}
-                />
-              </div>
-            </div>
+            <NumericInputGroup
+              values={nicBaseData}
+              config={nicBaseInputConfigs}
+              onValueChange={handleInputChange}
+              containerClassName="flex flex-col lg:flex-row content-center justify-center gap-8 mb-6 px-12"
+              fieldClassName="flex flex-col w-full lg:w-1/3"
+              labelClassName="p-2 mb-3 text-sm font-semibold bg-stone-700 rounded-md"
+              inputClassName="p-2 text-center rounded-md"
+            />
             <div>
               <div className="mt-4 p-2 bg-stone-800 rounded-md">
                 <p>

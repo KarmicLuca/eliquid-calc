@@ -1,5 +1,14 @@
 import { MixPreset } from "./types"
 
+const MIX_60_4060: MixPreset = {
+  name: '60ml 40/60',
+  ingredients: {
+    totalVolume: 60.0,
+    goalVG: 40,
+    goalNic: 1.5,
+    goalFlavorPc: 7
+  }
+}
 const MIX_60_5050: MixPreset = {
   name: '60ml 50/50',
   ingredients: {
@@ -37,4 +46,4 @@ const MIX_10_7030: MixPreset = {
   }
 }
 
-export default [MIX_60_5050, MIX_60_7030, MIX_10_5050, MIX_10_7030]
+export default [MIX_60_4060, MIX_60_5050, MIX_60_7030, MIX_10_5050, MIX_10_7030]
