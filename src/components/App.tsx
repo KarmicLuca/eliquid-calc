@@ -3,7 +3,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './Home';
 import NicBaseCalculator from './NicBase'
 import MixCalculator from './Mix'
-import Gorilla from './Gorilla'
 import '../assets/App.css'
 
 const router = createBrowserRouter([
